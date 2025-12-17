@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scalli Labs Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    
+    <!-- Theme Configuration Styles -->
+    <style>
+      :root {
+        /* --- BASE VARIABLES (Light Mode Default) --- */
+        --color-bg-page: #f1f5f9;      /* Slate 100 */
+        --color-bg-card: #ffffff;      /* White */
+        --color-bg-hover: #f8fafc;     /* Slate 50 */
+        --color-border: #cbd5e1;       /* Slate 300 */
+        
+        --color-text-main: #0f172a;    /* Slate 900 */
+        --color-text-muted: #64748b;   /* Slate 500 */
+        --color-text-inverted: #ffffff; 
+
+        /* Brand Colors (Default Amber/Yellow) */
+        --color-primary-50: #fefce8;
+        --color-primary-100: #fef9c3;
+        --color-primary-200: #fef08a;
+        --color-primary-300: #fde047;
+        --color-primary-400: #facc15;
+        --color-primary-500: #eab308;
+        --color-primary-600: #ca8a04;
+        --color-primary-700: #a16207;
+        --color-primary-800: #854d0e;
+        --color-primary-900: #713f12;
+        --color-primary-950: #422006;
+      }
+
+      /* --- DARK MODE (Default System) --- */
+      html.dark {
+        --color-bg-page: #09090b;      /* Zinc 950 */
+        --color-bg-card: #18181b;      /* Zinc 900 */
+        --color-bg-hover: #27272a;     /* Zinc 800 */
+        --color-border: #27272a;       /* Zinc 800 */
+        
+        --color-text-main: #f4f4f5;    /* Zinc 100 */
+        --color-text-muted: #a1a1aa;   /* Zinc 400 */
+        --color-text-inverted: #000000;
+      }
+
+      /* --- ADDASH THEME (Light) --- */
+      html[data-theme='addash'] {
+        --color-bg-page: #f8f8f5;      /* background-light */
+        --color-bg-card: #FFFFFF;      /* card-light */
+        --color-bg-hover: #E5E7EB;     /* border-light */
+        --color-border: #E5E7EB;       /* border-light */
+        
+        --color-text-main: #111827;    /* text-light-primary */
+        --color-text-muted: #6B7280;   /* text-light-secondary */
+        --color-text-inverted: #FFFFFF;
+
+        /* AdDash Neon Primary (#f9f906) mapped to palette */
+        --color-primary-50: #ffffea;
+        --color-primary-100: #fffec5;
+        --color-primary-200: #fffb85;
+        --color-primary-300: #fff546;
+        --color-primary-400: #f9f906;  /* Main Brand Color */
+        --color-primary-500: #e5e500;
+        --color-primary-600: #b8b800;
+        --color-primary-700: #939300;
+        --color-primary-800: #787805;
+        --color-primary-900: #66660a;
+        --color-primary-950: #3a3a02;
+      }
+
+      /* --- ADDASH THEME (Dark) --- */
+      html[data-theme='addash'].dark {
+        --color-bg-page: #23230f;      /* background-dark (Olive/Black) */
+        --color-bg-card: #1F2937;      /* card-dark (Gray/Blueish) */
+        --color-bg-hover: #374151;     /* border-dark */
+        --color-border: #374151;       /* border-dark */
+        
+        --color-text-main: #F9FAFB;    /* text-dark-primary */
+        --color-text-muted: #9CA3AF;   /* text-dark-secondary */
+        --color-text-inverted: #000000;
+
+        /* Keep Neon Primary */
+        --color-primary-400: #f9f906; 
+        --color-primary-500: #f9f906; /* Mapping main interactive color */
+        --color-primary-600: #dada05; 
+        --color-primary-700: #baba04;
+      }
+
+      body {
+        background-color: var(--color-bg-page);
+        color: var(--color-text-main);
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      }
+
+      /* Utility class for Material Icons if needed */
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--color-bg-page); 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--color-border); 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-text-muted); 
+      }
+    </style>
+
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              // Mapping 'white' to be dynamic for text readability
+              white: 'var(--color-text-main)', 
+              black: 'var(--color-text-inverted)',
+
+              // Dynamic Zinc mapping
+              zinc: {
+                50: '#fafafa',
+                100: '#f4f4f5',
+                200: '#e4e4e7',
+                300: '#d4d4d8',
+                400: 'var(--color-text-muted)', 
+                500: '#71717a',
+                600: '#52525b',
+                700: 'var(--color-bg-hover)',   
+                800: 'var(--color-border)',     
+                900: 'var(--color-bg-card)',    
+                950: 'var(--color-bg-page)',    
+              },
+              // Dynamic Primary Palette
+              primary: {
+                50: 'var(--color-primary-50)',
+                100: 'var(--color-primary-100)',
+                200: 'var(--color-primary-200)',
+                300: 'var(--color-primary-300)',
+                400: 'var(--color-primary-400)',
+                500: 'var(--color-primary-500)',
+                600: 'var(--color-primary-600)',
+                700: 'var(--color-primary-700)',
+                800: 'var(--color-primary-800)',
+                900: 'var(--color-primary-900)',
+                950: 'var(--color-primary-950)',
+              }
+            }
+          }
+        }
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "xlsx": "https://aistudiocdn.com/xlsx@^0.18.5",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "recharts": "https://aistudiocdn.com/recharts@^3.5.0",
+    "@supabase/supabase-js": "https://aistudiocdn.com/@supabase/supabase-js@2.45.4",
+    "@google/genai": "https://esm.sh/@google/genai@^1.33.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
